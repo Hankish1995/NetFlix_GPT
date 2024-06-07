@@ -3,6 +3,7 @@ import AppLayout from "../appLayout/AppLayout";
 import Login from "../Auth/Login";
 import Browse from "../Browse/Browse";
 
+
 const AppRouter = () => {
     const routes = createBrowserRouter([
         {
@@ -14,7 +15,7 @@ const AppRouter = () => {
                     element: <Login />
                 },
                 {
-                    path: "browse",
+                    path: "/browse",
                     element: <Browse />
                 }
             ]

@@ -1,32 +1,44 @@
 import React, { useState, useRef } from 'react'
 import { checkValidateData } from '../../utils/validations/Validations'
 import { UseSignUpAuth, UseSignIn } from '../../utils/customHooks/useAuthHooks'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [isSignIn, setIsSignIn] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
     const email = useRef()
     const password = useRef()
+    const navigate = useNavigate()
 
     const toggelAuth = () => {
         setIsSignIn(!isSignIn)
     }
 
     const handleAuth = async (e) => {
-        e.preventDefault()
-        const validate = checkValidateData(email.current.value, password.current.value)
-        setErrorMessage(validate)
+        e.preventDefault();
+        const validate = checkValidateData(email.current.value, password.current.value);
+        setErrorMessage(validate);
+
         if (!validate) {
             if (!isSignIn) {
-                const result = await UseSignUpAuth(email.current.value, password.current.value)
-                console.log(result)
-            }
-            else {
-                const userLoginIn = await UseSignIn(email.current.value, password.current.value)
-                console.log(userLoginIn)
+                try {
+                    await UseSignUpAuth(email.current.value, password.current.value);
+                    navigate("/browse")
+
+                } catch (error) {
+                    setErrorMessage(error.message);
+                }
+            } else {
+                try {
+                    await UseSignIn(email.current.value, password.current.value);
+                    navigate("browse")
+                } catch (error) {
+                    setErrorMessage(error.message);
+                }
             }
         }
     }
+
     return (
         <div>
             <div className='absolute'>
