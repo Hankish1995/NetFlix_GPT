@@ -1,11 +1,7 @@
-
-import './App.css';
-
+import AppRouter from "./components/AppRouter/AppRouter";
 function App() {
   return (
-    <div className="text-red-600">
-      Hello everyone lets build netflix gpt
-    </div>
+    <AppRouter />
   );
 }
 
