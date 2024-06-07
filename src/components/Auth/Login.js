@@ -12,7 +12,6 @@ const Login = () => {
     const email = useRef()
     const password = useRef()
     const name = useRef()
-    const navigate = useNavigate()
 
 
     const toggelAuth = () => {
@@ -31,7 +30,6 @@ const Login = () => {
                     const updateUserProfile = await UseUpdateUserProfile(name.current.value);
                     if (updateUserProfile) {
                         dispatch(addUser({ email: email.current.value, name: name.current.value, uid: user?.uid, accessToken: user?.accessToken }));
-                        navigate("/browse");
                     }
                 } catch (error) {
                     setErrorMessage(error.message);
@@ -39,7 +37,6 @@ const Login = () => {
             } else {
                 try {
                     await UseSignIn(email.current.value, password.current.value);
-                    navigate("browse")
                 } catch (error) {
                     setErrorMessage(error.message);
                 }
