@@ -1,14 +1,19 @@
 import React, { useState, useRef } from 'react'
 import { checkValidateData } from '../../utils/validations/Validations'
-import { UseSignUpAuth, UseSignIn } from '../../utils/customHooks/useAuthHooks'
+import { UseSignUpAuth, UseSignIn, UseUpdateUserProfile } from '../../utils/customHooks/useAuthHooks'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addUser } from "../../utils/redux/userSlice/userSlice"
 
 const Login = () => {
+    const dispatch = useDispatch()
     const [isSignIn, setIsSignIn] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
     const email = useRef()
     const password = useRef()
+    const name = useRef()
     const navigate = useNavigate()
+
 
     const toggelAuth = () => {
         setIsSignIn(!isSignIn)
@@ -22,9 +27,12 @@ const Login = () => {
         if (!validate) {
             if (!isSignIn) {
                 try {
-                    await UseSignUpAuth(email.current.value, password.current.value);
-                    navigate("/browse")
-
+                    const user = await UseSignUpAuth(email.current.value, password.current.value);
+                    const updateUserProfile = await UseUpdateUserProfile(name.current.value);
+                    if (updateUserProfile) {
+                        dispatch(addUser({ email: email.current.value, name: name.current.value, uid: user?.uid, accessToken: user?.accessToken }));
+                        navigate("/browse");
+                    }
                 } catch (error) {
                     setErrorMessage(error.message);
                 }
@@ -48,7 +56,7 @@ const Login = () => {
                 <form className='absolute my-36 mx-auto right-0 left-0 bg-black p-12 w-3/12  text-center  bg-opacity-70'>
                     <h2 className='m-3 p-3 text-3xl'>{isSignIn ? "Sign In" : "Sign Up"}</h2>
                     {!isSignIn && <div>
-                        <input type='text' placeholder="Full Name" className='p-4 my-4  w-full rounded-lg' />
+                        <input type='text' placeholder="Full Name" ref={name} className='p-4 my-4  w-full rounded-lg' />
                     </div>}
                     <div>
                         <input type='text' placeholder="Email Addresss" ref={email} className='p-4 my-4  w-full rounded-lg' />
