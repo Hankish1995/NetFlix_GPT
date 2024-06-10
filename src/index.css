@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(15,15,15); 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f00; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  .w-screen.aspect-video.-mt-40.pt-\[25\%\].px-24.absolute.text-white.bg-gradient-to-r.from-black {}

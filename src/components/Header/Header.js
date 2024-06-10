@@ -8,6 +8,7 @@ import { removeUser } from '../../utils/redux/userSlice/userSlice'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../utils/firebase/Firebase'
 import { addUser } from '../../utils/redux/userSlice/userSlice'
+import { toggelGptSearchBar } from '../../utils/redux/GptHandlerSlice/gptHandlerSlice'
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -37,9 +38,10 @@ const Header = () => {
     }
     return (
         <div>
-            <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
+            <div className='absolute w-[100%] px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
                 <img className='w-44' src={netflixLogo} alt="logo" />
                 {user && <div className='flex'>
+                    <button className='text-purple-800 font-bold' onClick={() => dispatch(toggelGptSearchBar())}>GPT Search</button>
                     <img className='w-10 h-10 m-4' src={userIcon} alt="userIcon" />
                     <button className='text-yellow-400 font-bold' onClick={() => handleSignOut()}>Sign Out</button>
                 </div>}
