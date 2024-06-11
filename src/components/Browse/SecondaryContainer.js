@@ -2,7 +2,7 @@ import React from 'react'
 import MovieList from './MovieList'
 import { useSelector } from 'react-redux'
 
-const SecondaryContainer = () => {
+const SecondaryContainer = ({ delete_margin }) => {
     const movieList = useSelector((store) => { return store.NOW_PLAYING })
     const popularMovies = useSelector((store) => { return store.POPULAR_MOVIE_LIST })
     const topRatedMovies = useSelector((store) => { return store.TOP_RATED_MOVIES })
@@ -12,7 +12,7 @@ const SecondaryContainer = () => {
     return (
         <>
             <div className='bg-black'>
-                <div className='-mt-72 relative pl-24 z-50'>
+                <div className={delete_margin ? "relative pl-24 z-50" : '-mt-72 relative pl-24 z-50'}>
                     <MovieList movies={trendingMovies?.data?.results} title={"Trending Now"} />
                     <MovieList movies={now_playing_movies_list} title={"Now Playing"} />
                     <MovieList movies={popularMovies?.data?.results} title={"Popular"} />

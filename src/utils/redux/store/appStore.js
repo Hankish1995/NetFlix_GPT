@@ -8,6 +8,7 @@ import upComingMovieSlice from "../upComingMovieSlice/UpComingMovieSlice";
 import trendingMovieSlice from "../trendingMovieSlice/TrendingMovieSlice";
 import gptSlice from "../GptHandlerSlice/gptHandlerSlice";
 import open_ai_movie_slice from "../openAiSlice/OpenAiSlice";
+import searchedMovieSlice from "../MovieSearchedSlice/MovieSearchedSlice";
 
 
 const appStore = configureStore({
@@ -20,7 +21,8 @@ const appStore = configureStore({
         UP_COMING_MOVIES: upComingMovieSlice,
         TRENDING_MOVIES: trendingMovieSlice,
         GPT_TOGGEL: gptSlice,
-        OPENAI_MOVIE_SUGGESTIONS: open_ai_movie_slice
+        OPENAI_MOVIE_SUGGESTIONS: open_ai_movie_slice,
+        SEARCHED_MOVIES: searchedMovieSlice
     }
 })
 

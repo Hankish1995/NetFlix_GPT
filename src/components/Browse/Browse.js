@@ -17,7 +17,6 @@ const Browse = () => {
     UseTrendingMovies()
 
     const toggel_result = useSelector(store => store.GPT_TOGGEL)
-    console.log(toggel_result, "this is the toggel result")
 
     return (
         <>

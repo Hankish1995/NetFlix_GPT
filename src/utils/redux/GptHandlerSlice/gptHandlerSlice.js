@@ -3,11 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 export const gptSlice = createSlice({
     name: "gptSlice",
     initialState: {
-        showGptSearch: false
+        showGptSearch: false,
+        searchMovie: false
     },
     reducers: {
-        toggelGptSearchBar: (state) => {
-            state.showGptSearch = !state.showGptSearch
+        toggelGptSearchBar: (state, action) => {
+            if (action.payload) {
+                state.searchMovie = action.payload
+                state.showGptSearch = !state.showGptSearch
+            }
+            else {
+                state.showGptSearch = !state.showGptSearch
+                state.searchMovie = false
+            }
             return state
         }
     }

@@ -28,7 +28,7 @@ const MovieList = ({ title, movies }) => {
             <h1 className="text-3xl py-6 text-white">{title}</h1>
             <div ref={scrollContainer} className="flex overflow-x-scroll space-x-4 no-scrollbar">
                 {movies?.map(movie => (
-                    <MovieCard key={movie?.id} poster_path={movie?.poster_path} className="min-w-[200px]" />
+                    <MovieCard key={movie?.id} id={movie?.id} poster_path={movie?.poster_path} className="min-w-[200px]" />
                 ))}
             </div>
         </div>

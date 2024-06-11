@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { userIcon, netflixLogo } from '../../utils/Images/Images'
 import { UseSignOut } from '../../utils/customHooks/useAuthHooks'
 import { useNavigate } from 'react-router-dom'
@@ -14,6 +14,7 @@ const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((store) => { return store.user })
+    const [searched_movies, setSearched_movies] = useState(false)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,9 +40,14 @@ const Header = () => {
     return (
         <div>
             <div className='absolute w-[100%] px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
-                <img className='w-44' src={netflixLogo} alt="logo" />
+                <img className='w-44' src={netflixLogo} alt="logo" onClick={() => navigate("/browse")} />
                 {user && <div className='flex'>
-                    <button className='text-purple-800 font-bold' onClick={() => dispatch(toggelGptSearchBar())}>GPT Search</button>
+                    <div className='mt-3'>
+                        <button className='text-white bg-red-500 p-2 m-2 rounded-lg' onClick={() => dispatch(toggelGptSearchBar({}))}>Search Movies</button>
+                    </div>
+                    <div className='mt-3'>
+                        <button className='text-white bg-purple-700 rounded-lg font-bold p-2 m-2' onClick={() => dispatch(toggelGptSearchBar())}>GPT Search</button>
+                    </div>
                     <img className='w-10 h-10 m-4' src={userIcon} alt="userIcon" />
                     <button className='text-yellow-400 font-bold' onClick={() => handleSignOut()}>Sign Out</button>
                 </div>}
